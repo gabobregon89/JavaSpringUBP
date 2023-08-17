@@ -1,8 +1,9 @@
 package com.spring.ubp.JavaSpringUBP.service;
 
 import com.spring.ubp.JavaSpringUBP.dto.ArtistDTO;
+import com.spring.ubp.JavaSpringUBP.dto.TodoDTO;
 
 public interface ArtistService {
 
-    ArtistDTO getArtistByName(String name);
+    TodoDTO getArtistByName(String name);
 }

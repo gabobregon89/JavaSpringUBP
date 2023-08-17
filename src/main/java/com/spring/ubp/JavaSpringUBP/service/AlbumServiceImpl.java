@@ -2,12 +2,14 @@ package com.spring.ubp.JavaSpringUBP.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.spring.ubp.JavaSpringUBP.configuration.SpotifyConfig;
-import com.spring.ubp.JavaSpringUBP.model.Album;
+import com.spring.ubp.JavaSpringUBP.dto.TodoDTO;
 import com.spring.ubp.JavaSpringUBP.model.Album2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+
+import java.net.URL;
 
 @Service
 public class AlbumServiceImpl implements AlbumService{
@@ -18,29 +20,23 @@ public class AlbumServiceImpl implements AlbumService{
     @Autowired
     private RestTemplate restTemplate;
 
-    private final String URL_BASE = "https://api.spotify.com/v1/albums/4aawyAB9vmqN3uQ7FjRGTy";
+    @Autowired
+    private ArtistServiceImpl artistService;
+
+    private final String URL_BASE = "https://api.spotify.com/v1/albums/";
 
     @Override
-//    public Album2 getAllAlbums() {
-//
-//    }
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.setContentType(MediaType.APPLICATION_JSON);
-//        headers.set("Authorization", "Bearer BQAMpbhGUb2K_ftZYbaqKjTSuNk8lB-E170G8l9gs8S07T5LLbLwVikMmXtSiZf0Gl_SzHxBFZF1l3DJ70-VLFWkD6NojvhIQaJ0AaQAMLDt34pOYSI");
-//
-//        Album2 response = restTemplate.getForObject(URL_BASE, Album2.class);
-//
-//
-//        return response;
-//    }
-    public Album2 getAllAlbums() {
+    public Album2 getAllAlbums(String name) {
         try {
             HttpHeaders headers = new HttpHeaders();
             headers.set("Accept", MediaType.APPLICATION_JSON_VALUE);
             String token = "Bearer " + spotifyConfig.getApiToken();
             headers.set("Authorization", token);
 
-            ResponseEntity<String> response = restTemplate.exchange(URL_BASE, HttpMethod.GET, new HttpEntity<>(headers), String.class);
+            TodoDTO items = artistService.getArtistByName(name);
+            String endpoint = URL_BASE + items.getAlbums().getItems().get(0).getId();
+
+            ResponseEntity<String> response = restTemplate.exchange(endpoint, HttpMethod.GET, new HttpEntity<>(headers), String.class);
 
             if (response.getStatusCode() == HttpStatus.OK) {
                 String responseBody = response.getBody();

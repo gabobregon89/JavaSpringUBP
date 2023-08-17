@@ -7,6 +7,6 @@ import lombok.Data;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Album2 {
 
-    private String album;
+    private String id;
     private String name;
 }

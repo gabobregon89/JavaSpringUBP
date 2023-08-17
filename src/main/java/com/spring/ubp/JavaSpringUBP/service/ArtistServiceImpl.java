@@ -3,7 +3,8 @@ package com.spring.ubp.JavaSpringUBP.service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.spring.ubp.JavaSpringUBP.configuration.SpotifyConfig;
 import com.spring.ubp.JavaSpringUBP.dto.ArtistDTO;
-import com.spring.ubp.JavaSpringUBP.dto.ItemsDTO;
+import com.spring.ubp.JavaSpringUBP.dto.TodoDTO;
+import com.spring.ubp.JavaSpringUBP.model.Album2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
@@ -19,7 +20,7 @@ public class ArtistServiceImpl implements ArtistService {
     private RestTemplate restTemplate;
 
     @Override
-    public ArtistDTO getArtistByName(String name) {
+    public TodoDTO getArtistByName(String name) {
 
         try {
             HttpHeaders headers = new HttpHeaders();
@@ -35,12 +36,12 @@ public class ArtistServiceImpl implements ArtistService {
                 String responseBody = response.getBody();
 
                 ObjectMapper objectMapper = new ObjectMapper();
-                ItemsDTO items = objectMapper.readValue(responseBody, ItemsDTO.class);
-                String itemsString = items.getItems().get(0);
+                TodoDTO items = objectMapper.readValue(responseBody, TodoDTO.class);
 
-                ArtistDTO artistResponse = objectMapper.readValue(itemsString, ArtistDTO.class);
+                ArtistDTO artistResponse = items.getArtists().getItems().get(0);
+                Album2 album2 = items.getAlbums().getItems().get(0);
 
-                return artistResponse;
+                return items;
             } else {
                 // Manejo de posibles códigos de estado de error aquí
                 return null;
