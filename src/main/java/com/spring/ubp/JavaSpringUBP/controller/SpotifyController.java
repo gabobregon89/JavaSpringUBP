@@ -1,7 +1,6 @@
 package com.spring.ubp.JavaSpringUBP.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.spring.ubp.JavaSpringUBP.dto.spotify.ItemsTrack;
 import com.spring.ubp.JavaSpringUBP.dto.spotify.TrackResponse;
 import com.spring.ubp.JavaSpringUBP.dto.spotify.TracksSpotify;
 import com.spring.ubp.JavaSpringUBP.service.SpotifyServiceImpl;

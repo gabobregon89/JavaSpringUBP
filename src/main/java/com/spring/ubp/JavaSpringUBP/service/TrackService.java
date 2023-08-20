@@ -2,13 +2,17 @@ package com.spring.ubp.JavaSpringUBP.service;
 
 import com.spring.ubp.JavaSpringUBP.dto.TrackDTO;
 
+import java.util.List;
+
 public interface TrackService {
 
     TrackDTO createTrack(TrackDTO trackDTO);
 
     TrackDTO getTrack(String name);
 
-    TrackDTO updateTrackById(Integer id, TrackDTO trackDTO);
+    List<TrackDTO> getAllTracks();
+
+    TrackDTO updatePlaylistOfTrackById(Integer id, String playlistName);
 
     void deleteTrackById(Integer id);
 }

@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/apiV1/tracks")
 public class TrackController {
@@ -15,24 +17,33 @@ public class TrackController {
     private TrackServiceImpl trackService;
 
     @PostMapping
-    public TrackDTO postTrack(@RequestBody TrackDTO trackDTO) {
-        return trackService.createTrack(trackDTO);
+    public ResponseEntity<TrackDTO> postTrack(@RequestBody TrackDTO trackDTO) {
+        TrackDTO response = trackService.createTrack(trackDTO);
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
     @GetMapping("/{name}")
-    public TrackDTO getTrack(@PathVariable(name = "name") String name) {
-        return trackService.getTrack(name);
+    public ResponseEntity<TrackDTO> getTrack(@PathVariable(name = "name") String name) {
+        TrackDTO response = trackService.getTrack(name);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<TrackDTO>> getAllTracks() {
+        List<TrackDTO> response = trackService.getAllTracks();
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
-    public TrackDTO updateTrack(@PathVariable(name = "id") Integer id, @RequestBody TrackDTO trackDTO) {
-        return trackService.updateTrackById(id, trackDTO);
+    public ResponseEntity<TrackDTO> updateTrack(@PathVariable(name = "id") Integer id, @RequestBody String playlistName) {
+        TrackDTO response = trackService.updatePlaylistOfTrackById(id, playlistName);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public String deleteTrack(@PathVariable(name = "id") Integer id) {
+    public ResponseEntity<String> deleteTrack(@PathVariable(name = "id") Integer id) {
         String message = "Track deleted successfully";
         trackService.deleteTrackById(id);
-        return message;
+        return new ResponseEntity<>(message, HttpStatus.OK);
     }
 }

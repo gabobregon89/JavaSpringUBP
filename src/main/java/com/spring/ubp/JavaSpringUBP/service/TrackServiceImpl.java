@@ -1,10 +1,15 @@
 package com.spring.ubp.JavaSpringUBP.service;
 
 import com.spring.ubp.JavaSpringUBP.dto.TrackDTO;
+import com.spring.ubp.JavaSpringUBP.exception.TrackNotFoundException;
 import com.spring.ubp.JavaSpringUBP.model.Track;
 import com.spring.ubp.JavaSpringUBP.repository.TrackRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TrackServiceImpl implements TrackService {
@@ -18,24 +23,42 @@ public class TrackServiceImpl implements TrackService {
 
     @Override
     public TrackDTO createTrack(TrackDTO trackDTO) {
-        Track trackSaved = trackRepository.save(trackDTOToEntity(trackDTO));
-        return trackEntityToDTO(trackSaved);
+        Track savedTrack = trackRepository.save(trackDTOToEntity(trackDTO));
+        return trackEntityToDTO(savedTrack);
     }
 
     @Override
     public TrackDTO getTrack(String name) {
-        Track track = trackRepository.findByName(name);
+        Track track = trackRepository.findByName(name)
+                .orElseThrow(()-> new TrackNotFoundException("track", "name", name));
         return trackEntityToDTO(track);
     }
 
     @Override
-    public TrackDTO updateTrackById(Integer id, TrackDTO trackDTO) {
-        return null;
+    public List<TrackDTO> getAllTracks() {
+        List<Track> tracks = trackRepository.findAll();
+        List<TrackDTO> dtos = new ArrayList<>();
+        for (Track track : tracks) {
+            dtos.add(trackEntityToDTO(track));
+        }
+        return dtos;
+    }
+
+    @Override
+    public TrackDTO updatePlaylistOfTrackById(Integer id, String playlistName) {
+        Track track = trackRepository.findById(id.longValue()).orElseThrow(
+                ()-> new TrackNotFoundException("track", "id", id.toString()));
+
+        track.setPlaylistName(playlistName);
+        Track updatedTrack = trackRepository.save(track);
+        return trackEntityToDTO(updatedTrack);
     }
 
     @Override
     public void deleteTrackById(Integer id) {
-
+        Track track = trackRepository.findById(id.longValue()).orElseThrow(
+                ()-> new TrackNotFoundException("track", "id", id.toString()));
+        trackRepository.delete(track);
     }
 
     //Convierto de DTO a Entity
