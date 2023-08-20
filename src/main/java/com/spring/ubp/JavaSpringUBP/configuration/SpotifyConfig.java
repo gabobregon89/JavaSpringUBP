@@ -20,4 +20,6 @@ public class SpotifyConfig {
     public RestTemplate getRestTemplate() {
         return new RestTemplate();
     }
+
+
 }

@@ -14,15 +14,16 @@ public class Track {
     @Column(name = "track_id")
     private Long id;
 
+    @Column(name = "spotify_id")
+    private String spotifyId;
+
     private String name;
 
-    @Column(name = "duration_seg")
-    private int durationSeg;
+    @Column(name = "duration_ms")
+    private int durationMs;
 
-    @Column(name = "track_number")
-    private int trackNumber;
+    @Column(name = "playlist_name")
+    private String playlistName;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "album_id")
-    private Album album;
+    private String artist;
 }

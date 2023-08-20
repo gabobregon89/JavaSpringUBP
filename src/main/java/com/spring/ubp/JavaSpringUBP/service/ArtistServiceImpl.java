@@ -2,9 +2,7 @@ package com.spring.ubp.JavaSpringUBP.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.spring.ubp.JavaSpringUBP.configuration.SpotifyConfig;
-import com.spring.ubp.JavaSpringUBP.dto.ArtistDTO;
-import com.spring.ubp.JavaSpringUBP.dto.TodoDTO;
-import com.spring.ubp.JavaSpringUBP.model.Album2;
+import com.spring.ubp.JavaSpringUBP.dto.spotify.CompleteSpotify;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
@@ -20,7 +18,7 @@ public class ArtistServiceImpl implements ArtistService {
     private RestTemplate restTemplate;
 
     @Override
-    public TodoDTO getArtistByName(String name) {
+    public CompleteSpotify getArtistByName(String name) {
 
         try {
             HttpHeaders headers = new HttpHeaders();
@@ -36,10 +34,7 @@ public class ArtistServiceImpl implements ArtistService {
                 String responseBody = response.getBody();
 
                 ObjectMapper objectMapper = new ObjectMapper();
-                TodoDTO items = objectMapper.readValue(responseBody, TodoDTO.class);
-
-                ArtistDTO artistResponse = items.getArtists().getItems().get(0);
-                Album2 album2 = items.getAlbums().getItems().get(0);
+                CompleteSpotify items = objectMapper.readValue(responseBody, CompleteSpotify.class);
 
                 return items;
             } else {
