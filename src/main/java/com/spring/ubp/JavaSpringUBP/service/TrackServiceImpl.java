@@ -28,6 +28,16 @@ public class TrackServiceImpl implements TrackService {
         return trackEntityToDTO(track);
     }
 
+    @Override
+    public TrackDTO updateTrackById(Integer id, TrackDTO trackDTO) {
+        return null;
+    }
+
+    @Override
+    public void deleteTrackById(Integer id) {
+
+    }
+
     //Convierto de DTO a Entity
     private Track trackDTOToEntity(TrackDTO dto) {
         Track track = new Track();
