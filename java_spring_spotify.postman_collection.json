@@ -1,0 +1,273 @@
+{
+	"info": {
+		"_postman_id": "6405f6b0-7520-4b65-a9cf-5dca41f51d57",
+		"name": "java_spring_spotify",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27558869"
+	},
+	"item": [
+		{
+			"name": "Track",
+			"item": [
+				{
+					"name": "createTrack",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"spotifyId\": \"0cslUTJ5eB4hUNs0fKyh59\",\r\n    \"name\": \"Nada Personal\",\r\n    \"durationMs\": 292200,\r\n    \"playlistName\": \"Lo que queda\",\r\n    \"artist\": \"Nada Personal\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/apiV1/tracks",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"apiV1",
+								"tracks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getTrack",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/apiV1/tracks/11 y 6",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"apiV1",
+								"tracks",
+								"11 y 6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/apiV1/tracks",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"apiV1",
+								"tracks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getTracksByPlaylist",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/apiV1/tracks/playlist?name=Rock del bueno",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"apiV1",
+								"tracks",
+								"playlist"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Rock del bueno"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateTrack",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"playlistName\": \"Rock pesado\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/apiV1/tracks/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"apiV1",
+								"tracks",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteTrack",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/apiV1/tracks/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"apiV1",
+								"tracks",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "SpotifyRequest",
+			"item": [
+				{
+					"name": "getTrackByName",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/apiV1/spotify/Nada Personal",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"apiV1",
+								"spotify",
+								"Nada Personal"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Soda Stereo",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Token Spotify",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer ODYxMjk5NWM3MjkwNGQ5ZWIwMzA4NDhmZjkzNGQ1OTI=:MzMyMTAwMTBkZWI4NDg2YTk3MTFlOWRiOTU3NWIwODI=",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"type": "text"
+								},
+								{
+									"key": "redirect_uri",
+									"value": "http://localhost:8080",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "8612995c72904d9eb030848ff934d592",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "33210010deb8486a9711e9db9575b082",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://accounts.spotify.com/api/token",
+							"protocol": "https",
+							"host": [
+								"accounts",
+								"spotify",
+								"com"
+							],
+							"path": [
+								"api",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getTracksByArtist",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/apiV1/spotify?artist=La Renga",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"apiV1",
+								"spotify"
+							],
+							"query": [
+								{
+									"key": "artist",
+									"value": "La Renga"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

@@ -28,4 +28,12 @@ public class TrackExceptionHandler {
         String message = ex.getMessage();
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(message);
     }
+
+    @ExceptionHandler(NullPointerException.class)
+    @ResponseBody
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseEntity<String> handleRestClientException(NullPointerException ex) {
+        String message = ex.getMessage();
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(message);
+    }
 }

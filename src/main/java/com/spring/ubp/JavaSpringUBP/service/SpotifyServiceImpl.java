@@ -31,13 +31,18 @@ public class SpotifyServiceImpl implements SpotifyService {
     @Override
     public TrackResponse getTrack(String track) throws JsonProcessingException {
         CompleteSpotify complete = searchToSpotify(track);
-        ItemsTrack item = complete.getTracks().getItems().get(0);
-        TrackResponse trackResponse = new TrackResponse();
-        trackResponse.setSpotifyId(item.getId());
-        trackResponse.setName(item.getName());
-        trackResponse.setDurationMs(item.getDuration_ms());
-        trackResponse.setArtist(complete.getArtists().getItems().get(0).getName());
-        return trackResponse;
+        try {
+            ItemsTrack item = complete.getTracks().getItems().get(0);
+            TrackResponse trackResponse = new TrackResponse();
+            trackResponse.setSpotifyId(item.getId());
+            trackResponse.setName(item.getName());
+            trackResponse.setDurationMs(item.getDuration_ms());
+            trackResponse.setArtist(complete.getArtists().getItems().get(0).getName());
+
+            return trackResponse;
+        } catch (NullPointerException ex) {
+            throw ex;
+        }
     }
 
     public CompleteSpotify searchToSpotify(String condition) throws JsonProcessingException {
@@ -61,7 +66,7 @@ public class SpotifyServiceImpl implements SpotifyService {
 
                 return complete;
             } else {
-                // Manejo de posibles códigos de estado de error aquí
+
                 return complete;
             }
         } catch (RestClientException | JsonProcessingException e) {
