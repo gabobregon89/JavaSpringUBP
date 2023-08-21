@@ -36,4 +36,12 @@ public class TrackExceptionHandler {
         String message = ex.getMessage();
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(message);
     }
+
+    @ExceptionHandler(PlaylistNotExistException.class)
+    @ResponseBody
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ResponseEntity<String> handleRestClientException(PlaylistNotExistException ex) {
+        String message = ex.getMessage();
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(message);
+    }
 }

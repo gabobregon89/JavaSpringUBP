@@ -1,6 +1,7 @@
 package com.spring.ubp.JavaSpringUBP.service;
 
 import com.spring.ubp.JavaSpringUBP.dto.TrackDTO;
+import com.spring.ubp.JavaSpringUBP.exception.PlaylistNotExistException;
 import com.spring.ubp.JavaSpringUBP.exception.TrackNotFoundException;
 import com.spring.ubp.JavaSpringUBP.model.Track;
 import com.spring.ubp.JavaSpringUBP.repository.TrackRepository;
@@ -37,8 +38,12 @@ public class TrackServiceImpl implements TrackService {
     public List<TrackDTO> getAllTracks() {
         List<Track> tracks = trackRepository.findAll();
         List<TrackDTO> dtos = new ArrayList<>();
-        for (Track track : tracks) {
-            dtos.add(trackEntityToDTO(track));
+        try {
+            for (Track track : tracks) {
+                dtos.add(trackEntityToDTO(track));
+            }
+        } catch (NullPointerException exception) {
+            throw exception;
         }
         return dtos;
     }
@@ -64,8 +69,11 @@ public class TrackServiceImpl implements TrackService {
     public List<TrackDTO> getTracksByPlaylist(String playlistName) {
         List<Track> tracks = trackRepository.findAllByPlaylistName(playlistName);
         List<TrackDTO> dtos = new ArrayList<>();
+        if (!tracks.isEmpty())
         for (Track track : tracks) {
             dtos.add(trackEntityToDTO(track));
+        } else {
+            throw new PlaylistNotExistException();
         }
         return dtos;
     }

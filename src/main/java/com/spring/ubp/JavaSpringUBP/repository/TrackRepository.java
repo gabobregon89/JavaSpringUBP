@@ -1,6 +1,5 @@
 package com.spring.ubp.JavaSpringUBP.repository;
 
-import com.spring.ubp.JavaSpringUBP.exception.TrackNotFoundException;
 import com.spring.ubp.JavaSpringUBP.model.Track;
 import org.springframework.data.jpa.repository.JpaRepository;
 

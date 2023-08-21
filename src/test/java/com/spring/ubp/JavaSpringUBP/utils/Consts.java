@@ -14,11 +14,11 @@ public class Consts {
     public static final String ARTIST = "Los Cafres";
     public static final String SPOTIFY_ID = "jsdAD12Gzas5zz";
     public static final String TRACK_NAME = "Salvame";
+    public static final Integer TRACK_ID = 1;
     public static final int DURATION_MS = 360000;
     public static final String PLAYLIST = "La playlist";
     public static final String SPOTIFY_TOKEN = "ajkshadlahslfalsnl1n2nltnl345l235l2kngkltnb24k3l5234nlkn23l4n2ln34l2";
     public static final String URL_BASE = "https://endpointfalse.com/v100/find?somehting={NAME}";
-    public static final String ENDPOINT_FALSE = "https://endpointfalse.com/v100/find?somehting=Los%20Cafres";
     public static final String JSON_COMPLETE = "{\"tracks\": {\"items\": [{\"id\": \"laisjdolanmla23nb2kk3\", \"name\": \"Salvame\", \"duration_ms\": \"360000\"}]},\"artists\": {\"items\": [{\"id\": \"AS89Xcouiasf8asfdJ\", \"name\": \"Los Cafres\"}]}}";
     public static final String JSON_FALSE = "{\"trucks\"}";
 
