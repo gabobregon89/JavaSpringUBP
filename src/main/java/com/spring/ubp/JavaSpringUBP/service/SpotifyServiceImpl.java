@@ -50,9 +50,10 @@ public class SpotifyServiceImpl implements SpotifyService {
             String endpoint = spotifyConfig.getBaseUrl();
             endpoint = endpoint.replace("{NAME}", condition);
 
-            ResponseEntity<String> response = restTemplate.exchange(endpoint, HttpMethod.GET, new HttpEntity<>(headers), String.class);
+            ResponseEntity<String> response = restTemplate.exchange(
+                    endpoint, HttpMethod.GET, new HttpEntity<>(headers), String.class);
 
-            if (response.getStatusCode() == HttpStatus.OK) {
+            if (response.getStatusCode().is2xxSuccessful() & response.getBody() != null) {
                 String responseBody = response.getBody();
 
                 ObjectMapper objectMapper = new ObjectMapper();
