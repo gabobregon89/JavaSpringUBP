@@ -23,8 +23,8 @@ public class SpotifyServiceImpl implements SpotifyService {
     private RestTemplate restTemplate;
 
     @Override
-    public TracksSpotify getTracksByArtist(String name) throws JsonProcessingException {
-        CompleteSpotify complete = searchToSpotify(name);
+    public TracksSpotify getTracksByArtist(String artist) throws JsonProcessingException {
+        CompleteSpotify complete = searchToSpotify(artist);
         return complete.getTracks();
     }
 

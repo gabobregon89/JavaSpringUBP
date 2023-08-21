@@ -61,6 +61,16 @@ public class TrackServiceImpl implements TrackService {
         trackRepository.delete(track);
     }
 
+    @Override
+    public List<TrackDTO> getTracksByPlaylist(String playlistName) {
+        List<Track> tracks = trackRepository.findAllByPlaylistName(playlistName);
+        List<TrackDTO> dtos = new ArrayList<>();
+        for (Track track : tracks) {
+            dtos.add(trackEntityToDTO(track));
+        }
+        return dtos;
+    }
+
     //Convierto de DTO a Entity
     private Track trackDTOToEntity(TrackDTO dto) {
         Track track = new Track();

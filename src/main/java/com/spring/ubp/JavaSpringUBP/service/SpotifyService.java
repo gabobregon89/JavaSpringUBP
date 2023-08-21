@@ -6,7 +6,7 @@ import com.spring.ubp.JavaSpringUBP.dto.spotify.TracksSpotify;
 
 public interface SpotifyService {
 
-    TracksSpotify getTracksByArtist(String name) throws JsonProcessingException;
+    TracksSpotify getTracksByArtist(String artist) throws JsonProcessingException;
 
     TrackResponse getTrack(String track) throws JsonProcessingException;
 }

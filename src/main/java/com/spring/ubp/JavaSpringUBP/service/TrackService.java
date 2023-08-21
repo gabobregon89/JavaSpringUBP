@@ -15,4 +15,6 @@ public interface TrackService {
     TrackDTO updatePlaylistOfTrackById(Integer id, String playlistName);
 
     void deleteTrackById(Integer id);
+
+    List<TrackDTO> getTracksByPlaylist(String playlistName);
 }
